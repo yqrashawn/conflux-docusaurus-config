@@ -14,16 +14,18 @@ const {
 } = require("@docusaurus/plugin-content-docs/lib/metadata.js");
 
 const template = fs.readFileSync(
-  presolve(__dirname, "./sidebars.generated.js.mustache"),
+  presolve(__dirname, "./sidebars.generated.json.mustache"),
   "utf-8"
 );
-const configs = require(presolve("./sidebars.js"));
+const configs = require(presolve(__dirname, "../sidebars.js"));
 
 const docsDirs = fs
-  .readdirSync(presolve("./docs"))
-  .filter((path) => fs.lstatSync(presolve("./docs", path)).isDirectory());
+  .readdirSync(presolve(__dirname, "../docs"))
+  .filter((path) =>
+    fs.lstatSync(presolve(__dirname, "../docs", path)).isDirectory()
+  );
 const docsDirsMetadata = {};
-// const gitSubmoduleDir = presolve("../.git/module");
+// const gitSubmoduleDir = presolve(__dirname, "../.git/module");
 
 function eachSidebarDoc(sidebarArr, processDocFn) {
   for (let i = 0; i < sidebarArr.length; i++) {
@@ -61,7 +63,7 @@ function processSidebarDoc(mdMetadatas) {
 (async function () {
   await Promise.all(
     docsDirs.map(async (path) => {
-      const absPath = presolve("./docs", path);
+      const absPath = presolve(__dirname, "../docs", path);
       const git = simpleGit(absPath);
       const remoteUrl = await promisify(git.getRemotes).call(git, true);
       docsDirsMetadata[path] = {
@@ -106,7 +108,7 @@ function processSidebarDoc(mdMetadatas) {
   );
 
   return writeFile(
-    presolve(__dirname, `../sidebars.generated.js`),
+    presolve(__dirname, `../sidebars.json`),
     mustache.render(template, {
       config: JSON.stringify(
         eachSidebarDoc(configs.docs, processSidebarDoc(mdMetadatas))

@@ -1,6 +1,6 @@
 const { resolve } = require("path");
-const stipStyle = require("./development/rehype-strip-styles-in-md");
-const { lang: cfxLang } = require(resolve("./cfxdoc.config.js"));
+const stipStyle = require(resolve(__dirname, "./development/rehype-strip-styles-in-md") );
+const { lang: cfxLang } = require(resolve(__dirname, "./cfxdoc.config.json"));
 
 module.exports = {
   title: "Conflux",
@@ -91,9 +91,9 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          path: "docs",
+          path: resolve(__dirname, "./docs" ),
           routeBasePath: "docs",
-          sidebarPath: resolve(__dirname, "./sidebars.generated.js"),
+          sidebarPath: resolve(__dirname, "./sidebars.json"),
           editUrl: `https://github.com/Conflux-Chain/conflux-developer-site${
             cfxLang === "en" ? "" : "-" + cfxLang
           }/edit/master`,
@@ -102,7 +102,7 @@ module.exports = {
           rehypePlugins: [stipStyle],
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: resolve(__dirname, "./src/css/custom.css"),
         },
       },
     ],
