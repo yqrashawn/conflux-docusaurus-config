@@ -1,9 +1,8 @@
 {
-  "name": "@conflux/docusaurus-config",
+  "name": "conflux-docusaurus-config",
   "version": "0.0.1",
   "repository": "https://github.com/yqrashawn/conflux-docusaurus-config.git",
   "author": "yqrashawn <namy.19@gmail.com>",
-  "private": true,
   "bin": {
     "cfxdoc": "bin/cfxDoc.js"
   },
