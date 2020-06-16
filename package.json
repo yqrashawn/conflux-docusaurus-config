@@ -4,6 +4,9 @@
   "repository": "https://github.com/yqrashawn/conflux-docusaurus-config.git",
   "author": "yqrashawn <namy.19@gmail.com>",
   "private": true,
+  "bin": {
+    "cfxdoc": "bin/cfxDoc.js"
+  },
   "scripts": {
     "REINIT": "sh development/reinit.sh",
     "genconf": "node development/gen_each_lang_sidebars_config.js",
