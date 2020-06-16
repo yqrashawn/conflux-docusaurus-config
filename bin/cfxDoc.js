@@ -19,12 +19,15 @@ process.argv.push(siteDir);
 if (isBuild) {
   cpx.copySync(`${cwd}/.git/**/*`, `${siteDir}/.git`);
   cpx.copySync(`${cwd}/.gitmodules`, `${siteDir}/.gitmodules`);
+}
+
+if (isStart || isBuild) {
   cpx.copySync(`${cwd}/docs/**/*`, `${siteDir}/docs`);
 }
 
 if (isStart) {
   const watchingDoc = cpx.watch(`${cwd}/docs/**/*`, `${siteDir}/docs`, {
-    initialCopy: true,
+    initialCopy: false,
   });
   process.on("exit", () => {
     watchingDoc.close();
