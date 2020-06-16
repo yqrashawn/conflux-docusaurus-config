@@ -1,6 +1,6 @@
 {
   "name": "conflux-docusaurus-config",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "repository": "https://github.com/yqrashawn/conflux-docusaurus-config.git",
   "author": "yqrashawn <namy.19@gmail.com>",
   "bin": {
@@ -36,10 +36,10 @@
     ]
   },
   "devDependencies": {
-    "globby": "^11.0.0",
-    "html-to-react": "^1.4.2",
-    "mustache": "^4.0.0",
+    "globby": "^11.0.1",
+    "html-to-react": "^1.4.3",
+    "mustache": "^4.0.1",
     "react-element-to-jsx-string": "^14.3.1",
-    "simple-git": "^1.132.0"
+    "simple-git": "^2.6.0"
   }
 }
