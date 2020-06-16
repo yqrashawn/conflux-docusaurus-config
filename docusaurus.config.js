@@ -93,12 +93,12 @@ module.exports = {
         docs: {
           path: "docs",
           routeBasePath: "docs",
-          sidebarPath: resolve(__dirname, "sidebars.generated.js"),
+          sidebarPath: resolve(__dirname, "./sidebars.generated.js"),
           editUrl: `https://github.com/Conflux-Chain/conflux-developer-site${
             cfxLang === "en" ? "" : "-" + cfxLang
           }/edit/master`,
           showLastUpdateTime: true,
-          showLastUpdateAuthor: true,
+          showLastUpdateAuthor: false,
           rehypePlugins: [stipStyle],
         },
         theme: {

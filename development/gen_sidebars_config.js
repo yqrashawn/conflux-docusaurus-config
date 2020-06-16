@@ -7,23 +7,21 @@ const simpleGit = require("simple-git");
 
 const writeFile = promisify(fs.writeFile);
 const {
-  docs: { path: docsRootDir, include = ["**/*.{md,mdx}"] }
+  docs: { path: docsRootDir, include = ["**/*.{md,mdx}"] },
 } = require(presolve(__dirname, "../docusaurus.config.js")).presets[0][1];
 const {
-  default: processMetadata
+  default: processMetadata,
 } = require("@docusaurus/plugin-content-docs/lib/metadata.js");
 
 const template = fs.readFileSync(
-  presolve(__dirname, "./sidebars.js.mustache"),
+  presolve(__dirname, "./sidebars.generated.js.mustache"),
   "utf-8"
 );
 const configs = require(presolve("./sidebars.js"));
 
 const docsDirs = fs
-  .readdirSync(presolve(__dirname, "../docs"))
-  .filter(path =>
-    fs.lstatSync(presolve(__dirname, "../docs", path)).isDirectory()
-  );
+  .readdirSync(presolve("./docs"))
+  .filter((path) => fs.lstatSync(presolve("./docs", path)).isDirectory());
 const docsDirsMetadata = {};
 // const gitSubmoduleDir = presolve("../.git/module");
 
@@ -41,52 +39,54 @@ function eachSidebarDoc(sidebarArr, processDocFn) {
 }
 
 function processSidebarDoc(mdMetadatas) {
-  return function({ type, id, folder }) {
+  return function ({ type, id, folder }) {
     const md = mdMetadatas.find(
-      metadata => metadata.baseId === id && metadata.folder === folder
+      (metadata) => metadata.baseId === id && metadata.folder === folder
     );
 
     if (!md) {
-      console.error(new Error(`Can't find markdown file with the id: ${id} under ${folder}`))
+      console.error(
+        new Error(`Can't find markdown file with the id: ${id} under ${folder}`)
+      );
       process.exit(1);
     }
 
     return {
       type,
-      id: md.id
+      id: md.id,
     };
   };
 }
 
-(async function() {
+(async function () {
   await Promise.all(
-    docsDirs.map(async path => {
-      const absPath = presolve(__dirname, "../docs", path);
+    docsDirs.map(async (path) => {
+      const absPath = presolve("./docs", path);
       const git = simpleGit(absPath);
       const remoteUrl = await promisify(git.getRemotes).call(git, true);
       docsDirsMetadata[path] = {
         absPath,
-        remoteUrl: remoteUrl[0].refs.fetch
+        remoteUrl: remoteUrl[0].refs.fetch,
       };
     })
   );
 
-  const docsFiles = (await globby(include, { cwd: docsRootDir })).filter(path =>
-    path.includes("/")
-  );
+  const docsFiles = (
+    await globby(include, { cwd: docsRootDir })
+  ).filter((path) => path.includes("/"));
 
   const mdMetadatas = await Promise.all(
-    docsFiles.map(async source => {
+    docsFiles.map(async (source) => {
       const metadata = await processMetadata({
         source,
         refDir: docsRootDir,
         options: {
           routeBasePath: "docs",
           showLastUpdateAuthor: true,
-          showLastUpdateTime: true
+          showLastUpdateTime: true,
         },
         env: { versioning: false },
-        context: { siteDir: presolve(__dirname, "../"), baseUrl: "/" }
+        context: { siteDir: presolve(__dirname, "../"), baseUrl: "/" },
       });
 
       const path = metadata.id.slice(0, metadata.id.indexOf("/"));
@@ -106,11 +106,11 @@ function processSidebarDoc(mdMetadatas) {
   );
 
   return writeFile(
-    `sidebars.generated.js`,
+    presolve(__dirname, `../sidebars.generated.js`),
     mustache.render(template, {
       config: JSON.stringify(
         eachSidebarDoc(configs.docs, processSidebarDoc(mdMetadatas))
-      )
+      ),
     })
   );
 })();
