@@ -8,9 +8,8 @@
   },
   "scripts": {
     "REINIT": "sh development/reinit.sh",
-    "genconf": "node development/gen_each_lang_sidebars_config.js",
-    "start": "yarn genconf && docusaurus start",
-    "build": "yarn genconf && docusaurus build",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "now-deploy": "now ./build --static -no-clipboard --token $NOW_TOKEN --public"
@@ -20,13 +19,17 @@
     "@docusaurus/preset-classic": "^2.0.0-alpha.56",
     "classnames": "^2.2.6",
     "cpx2": "^2.0.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "fast-glob": "^3.2.4",
+    "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "html-to-react": "^1.4.3",
     "mustache": "^4.0.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "react-element-to-jsx-string": "^14.3.1",
-    "simple-git": "^2.6.0"
+    "run-queue": "^2.0.1",
+    "simple-git": "^2.6.0",
+    "tmp": "^0.2.1"
   },
   "browserslist": {
     "production": [

@@ -1,6 +1,6 @@
 const { resolve } = require("path");
 const stipStyle = require("./development/rehype-strip-styles-in-md");
-const { lang: cfxLang } = require(resolve("./cfxdoc.config.js"));
+const { lang: cfxLang } = require(resolve(__dirname, "./cfxdoc.config.js"));
 
 module.exports = {
   title: "Conflux",
@@ -102,7 +102,7 @@ module.exports = {
           rehypePlugins: [stipStyle],
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: resolve(__dirname, "./src/css/custom.css"),
         },
       },
     ],
