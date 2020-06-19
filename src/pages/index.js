@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Layout from "@theme/Layout";
-import useThemeContext from '@theme/hooks/useThemeContext';
+import useThemeContext from "@theme/hooks/useThemeContext";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -87,7 +87,11 @@ function Home() {
                 "button button--outline button--secondary button--lg",
                 styles.getStarted
               )}
-              to={useBaseUrl("/docs/introduction/en/conflux_overview")}
+              to={useBaseUrl(
+                `/docs/introduction/${
+                  process.env.CFX_LANG === "en" ? "en/" : ""
+                }conflux_overview`
+              )}
             >
               Get Started
             </Link>
@@ -100,11 +104,7 @@ function Home() {
             <div className="container">
               <div className="row">
                 {features.map((props, idx) => (
-                  <Feature
-                    key={idx}
-                    {...props}
-                    imageUrl={props.imageUrl}
-                  />
+                  <Feature key={idx} {...props} imageUrl={props.imageUrl} />
                 ))}
               </div>
             </div>

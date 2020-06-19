@@ -1,13 +1,25 @@
 const { resolve } = require("path");
-const stipStyle = require(resolve(__dirname, "./development/rehype-strip-styles-in-md") );
+const stipStyle = require(resolve(
+  __dirname,
+  "./development/rehype-strip-styles-in-md"
+));
 const { lang: cfxLang } = require(resolve(__dirname, "./cfxdoc.config.json"));
+const isEN = cfxLang === "en";
+
+const GH_REPO_URL = isEN
+  ? "https://github.com/Conflux-Chain/conflux-developer-site"
+  : `https://github.com/Conflux-Chain/${cfxLang}.developer.conflux-chain.org`;
+
+const SITE_URL = `https://${
+  isEN ? "" : cfxLang + "."
+}developer.conflux-chain.org`;
+
+process.env.CFX_LANG = cfxLang;
 
 module.exports = {
   title: "Conflux",
   tagline: "Where Valuable Bits are Exchanged and Validated",
-  url: `https://${
-    cfxLang === "en" ? "" : cfxLang + "."
-  }developer.conflux-chain.org`,
+  url: SITE_URL,
   baseUrl: "/",
   favicon: "img/favicon.ico",
   organizationName: "Conflux-Chain", // Usually your GitHub org/user name.
@@ -22,15 +34,15 @@ module.exports = {
       },
       links: [
         // {
-        //   to: `docs/introduction/${cfxLang}/conflux_overview`,
+        //   to: isEN
+        //  ? "docs/introduction/en/conflux_overview"
+        //  : "docs/introduction/conflux_overview",
         //   label: "Docs",
         //   position: "left"
         // },
         // { to: "blog", label: "Blog", position: "left" },
         {
-          href: `https://github.com/Conflux-Chain/conflux-developer-site${
-            cfxLang === "en" ? "" : "-" + cfxLang
-          }`,
+          href: GH_REPO_URL,
           label: "GitHub",
           position: "right",
         },
@@ -44,11 +56,15 @@ module.exports = {
           items: [
             {
               label: "Overview",
-              to: `docs/introduction/${cfxLang}/conflux_overview`,
+              to: isEN
+                ? "docs/introduction/en/conflux_overview"
+                : "docs/introduction/conflux_overview",
             },
             {
               label: "Portal",
-              to: `docs/conflux-portal/docs/${cfxLang}/portal/introduction`,
+              to: isEN
+                ? "docs/conflux-portal/docs/en/portal/introduction"
+                : "docs/conflux-portal/docs/portal/introduction",
             },
           ],
         },
@@ -91,12 +107,10 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          path: resolve(__dirname, "./docs" ),
+          path: resolve(__dirname, "./docs"),
           routeBasePath: "docs",
           sidebarPath: resolve(__dirname, "./sidebars.json"),
-          editUrl: `https://github.com/Conflux-Chain/conflux-developer-site${
-            cfxLang === "en" ? "" : "-" + cfxLang
-          }/edit/master`,
+          editUrl: GH_REPO_URL + "/edit/master",
           showLastUpdateTime: true,
           showLastUpdateAuthor: false,
           rehypePlugins: [stipStyle],
