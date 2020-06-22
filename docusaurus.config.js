@@ -14,11 +14,13 @@ const SITE_URL = `https://${
   isEN ? "" : cfxLang + "."
 }developer.conflux-chain.org`;
 
+const trans = require(resolve(__dirname, "./src/i18n.js"))[cfxLang];
+
 process.env.CFX_LANG = cfxLang;
 
 module.exports = {
   title: "Conflux",
-  tagline: "Where Valuable Bits are Exchanged and Validated",
+  tagline: trans["homepage/generalDescription"],
   url: SITE_URL,
   baseUrl: "/",
   favicon: "img/favicon.ico",
@@ -52,10 +54,10 @@ module.exports = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: trans.Docs,
           items: [
             {
-              label: "Overview",
+              label: trans["Overview"],
               to: isEN
                 ? "docs/introduction/en/conflux_overview"
                 : "docs/introduction/conflux_overview",
@@ -69,7 +71,7 @@ module.exports = {
           ],
         },
         {
-          title: "Community",
+          title: trans.Community,
           items: [
             {
               label: "Bounty",
@@ -82,7 +84,7 @@ module.exports = {
           ],
         },
         {
-          title: "Social",
+          title: trans.Social,
           items: [
             // {
             //   label: "Blog",
@@ -119,6 +121,12 @@ module.exports = {
           customCss: resolve(__dirname, "./src/css/custom.css"),
         },
       },
+    ],
+  ],
+  plugins: [
+    [
+      "docusaurus2-dotenv",
+      { systemvars: true },
     ],
   ],
 };

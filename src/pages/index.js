@@ -6,49 +6,33 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
+import i18n from "../i18n";
+const trans = i18n[process.env.CFX_LANG];
 
 const features = [
   {
-    title: <>Scalability</>,
+    title: <>{trans.Scalability}</>,
     imageUrl: {
       dark: "img/scalability-dark.svg",
       light: "img/scalability-light.svg",
     },
-    description: (
-      <>
-        By adopting an scalability consensus mechanism and safely retaining fork
-        blocks, Conflux realized a high throughput rate of 3000-6000 TPS in our
-        real-network testing.
-      </>
-    ),
+    description: <>{trans["homepage/scalabilityDescription"]}</>,
   },
   {
-    title: <>Extensibility</>,
+    title: <>{trans.Extensibility}</>,
     imageUrl: {
       dark: "img/extensive-dark.svg",
       light: "img/extensive-light.svg",
     },
-    description: (
-      <>
-        Blockchain oracle combined with cryptographic tools to realize powerful
-        features such as external data feeding, confidential data control, and
-        beyond.
-      </>
-    ),
+    description: <>{trans["homepage/extensibilityDescription"]}</>,
   },
   {
-    title: <>Security</>,
+    title: <>{trans.Security}</>,
     imageUrl: {
       dark: "img/security-dark.svg",
       light: "img/security-light.svg",
     },
-    description: (
-      <>
-        Ensured by 2 Dimensional protection - Anti double-spend attack
-        protection (consensus-level) and contract code proofreading
-        (application-level).
-      </>
-    ),
+    description: <>{trans["homepage/securityDescription"]}</>,
   },
 ];
 
@@ -93,7 +77,7 @@ function Home() {
                 }conflux_overview`
               )}
             >
-              Get Started
+              {trans.getStarted}
             </Link>
           </div>
         </div>

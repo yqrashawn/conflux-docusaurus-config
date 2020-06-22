@@ -1,6 +1,6 @@
 {
   "name": "conflux-docusaurus-config",
-  "version": "0.0.11",
+  "version": "0.0.14",
   "repository": "https://github.com/yqrashawn/conflux-docusaurus-config.git",
   "author": "yqrashawn <namy.19@gmail.com>",
   "bin": {
@@ -21,6 +21,7 @@
     "chokidar": "^3.4.0",
     "classnames": "^2.2.6",
     "cpx2": "^2.0.0",
+    "docusaurus2-dotenv": "^1.4.0",
     "globby": "^11.0.1",
     "html-to-react": "^1.4.3",
     "mustache": "^4.0.1",

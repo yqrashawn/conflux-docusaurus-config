@@ -700,3 +700,7 @@ MigrationBackup/
 
 # End of https://www.gitignore.io/api/node,rust,linux,macos,emacs,windows,webstorm,visualstudio,visualstudiocode
 .now
+/cfxdoc.config.json
+/sidebars.js
+/sidebars.json
+/static/img/tree_graph.jpg
