@@ -5,20 +5,26 @@ const stipStyle = require(resolve(
 ));
 const { lang: cfxLang } = require(resolve(__dirname, "./cfxdoc.config.json"));
 const isEN = cfxLang === "en";
+const domainName = isEN
+  ? "developer.conflux-chain.org"
+  : cfxLang + ".developer.conflux-chain.org";
 
 const GH_REPO_URL = isEN
   ? "https://github.com/Conflux-Chain/conflux-developer-site"
   : `https://github.com/Conflux-Chain/${cfxLang}.developer.conflux-chain.org`;
 
-const SITE_URL = `https://${
-  isEN ? "" : cfxLang + "."
-}developer.conflux-chain.org`;
+const SITE_URL = "https://" + domainName;
 
 const trans = require(resolve(__dirname, "./src/i18n.js"))[cfxLang];
 
 process.env.CFX_LANG = cfxLang;
 
-module.exports = {
+const algolia = {
+  apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+  indexName: domainName,
+};
+
+const docusaurusConfig = {
   title: "Conflux",
   tagline: trans["homepage/generalDescription"],
   url: SITE_URL,
@@ -123,10 +129,11 @@ module.exports = {
       },
     ],
   ],
-  plugins: [
-    [
-      "docusaurus2-dotenv",
-      { systemvars: true },
-    ],
-  ],
+  plugins: [["docusaurus2-dotenv", { systemvars: true }]],
 };
+
+if (process.env.ALGOLIA_SEARCH_API_KEY) {
+  docusaurusConfig.themeConfig.algolia = algolia;
+}
+
+module.exports = docusaurusConfig;
