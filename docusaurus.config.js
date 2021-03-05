@@ -107,7 +107,7 @@ const docusaurusConfig = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} Conflux Chain, Inc. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Conflux Chain, Inc. All Rights Reserved.`,
     },
   },
   presets: [
