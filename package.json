@@ -1,6 +1,6 @@
 {
   "name": "conflux-docusaurus-config",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "repository": "https://github.com/yqrashawn/conflux-docusaurus-config.git",
   "author": "yqrashawn <namy.19@gmail.com>",
   "bin": {
