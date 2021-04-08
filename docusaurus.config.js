@@ -1,28 +1,28 @@
-const { resolve } = require("path");
+const { resolve } = require("path")
 const stipStyle = require(resolve(
   __dirname,
   "./development/rehype-strip-styles-in-md"
-));
-const { lang: cfxLang } = require(resolve(__dirname, "./cfxdoc.config.json"));
-const isEN = cfxLang === "en";
+))
+const { lang: cfxLang } = require(resolve(__dirname, "./cfxdoc.config.json"))
+const isEN = cfxLang === "en"
 const domainName = isEN
   ? "developer.conflux-chain.org"
-  : cfxLang + ".developer.conflux-chain.org";
+  : cfxLang + ".developer.conflux-chain.org"
 
 const GH_REPO_URL = isEN
   ? "https://github.com/Conflux-Chain/conflux-developer-site"
-  : `https://github.com/Conflux-Chain/${cfxLang}.developer.conflux-chain.org`;
+  : `https://github.com/Conflux-Chain/${cfxLang}.developer.conflux-chain.org`
 
-const SITE_URL = "https://" + domainName;
+const SITE_URL = "https://" + domainName
 
-const trans = require(resolve(__dirname, "./src/i18n.js"))[cfxLang];
+const trans = require(resolve(__dirname, "./src/i18n.js"))[cfxLang]
 
-process.env.CFX_LANG = cfxLang;
+process.env.CFX_LANG = cfxLang
 
 const algolia = {
   apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
-  indexName: domainName,
-};
+  indexName: process.env.ALGOLIA_INDEX_NAME,
+}
 
 const docusaurusConfig = {
   title: "Conflux",
@@ -130,10 +130,10 @@ const docusaurusConfig = {
     ],
   ],
   plugins: [["docusaurus2-dotenv", { systemvars: true }]],
-};
-
-if (process.env.ALGOLIA_SEARCH_API_KEY) {
-  docusaurusConfig.themeConfig.algolia = algolia;
 }
 
-module.exports = docusaurusConfig;
+if (process.env.ALGOLIA_SEARCH_API_KEY) {
+  docusaurusConfig.themeConfig.algolia = algolia
+}
+
+module.exports = docusaurusConfig
