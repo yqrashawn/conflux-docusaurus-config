@@ -1,7 +1,7 @@
 {
   "name": "conflux-docusaurus-config",
   "version": "0.1.0",
-  "repository": "https://github.com/yqrashawn/conflux-docusaurus-config.git",
+  "repository": "git@github.com:Conflux-Chain/conflux-docusaurus-config.git",
   "author": "yqrashawn <namy.19@gmail.com>",
   "bin": {
     "cfxdoc": "bin/cfxDoc.js"
@@ -31,11 +31,7 @@
     "simple-git": "^2.6.0"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
